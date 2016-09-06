@@ -43,8 +43,51 @@ function BFS (graph){
 
 	} 
 
-	console.log(pai);
-	console.log(visitados);
+	console.log("Pai: " + pai);
+	console.log("Visitados: " + visitados);
 };
 
+
+
+
+
+
+
+
+
+//DFS recursiv approach
+
+var visited = [undefined,undefined,undefined,undefined,undefined,];
+function DFS (graph){
+	
+	for(var i = 0; i <= graph.length-1; i++){
+		if(visited[i] === undefined ){
+			//console.log("1 FOR: " + i);
+			DFS_visit(graph,i);
+			
+		}
+	}
+	console.log("Visitados: " + visited);
+};
+
+function DFS_visit (graph,index){
+	visited[index] = true;
+	var u = graph[index].conn;
+	
+	for (var i = u.length - 1; i >= 0; i--) {
+		if(visited[u[i]] === undefined){
+			DFS_visit(graph,u[i]-1);
+		}
+	}
+};
+
+
+
+
+//Calling methods
+
+console.log("\n\n=========== Starting BFS visit =========== \n\n")
 BFS(makeGraph());
+
+console.log("\n\n=========== Starting Recursive DFS visit =========== \n\n")
+DFS(makeGraph());
